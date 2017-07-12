@@ -1,6 +1,7 @@
 /*
 Create Angular config in app.config module
 */
+
 export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) => {
     'use strict'
     // Define prefix
@@ -19,7 +20,7 @@ export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($s
         .state('callback', {
             url: '/auth/callback/:token',
             template: '',
-            controller: ['UsersService', '$stateParams', '$state', function(UsersService, $stateParams, $state) {
+            controller: ['UsersService', '$stateParams', '$state', function (UsersService, $stateParams, $state) {
                 if ($stateParams.token) {
                     UsersService.setToken($stateParams.token).then((user) => {
                         let toastContent = `Welcome ${user.name} !`

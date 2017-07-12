@@ -1,0 +1,24 @@
+<form ng-submit="$ctrl.addPerson()">
+  <input-field>
+    <input type="text" ng-model="$ctrl.person">
+    <label>Input label</label>
+    <button type="button" ng-click="$ctrl.addPerson($ctrl.person)">Add Person</button>
+    <button type="button" ng-click="$ctrl.runAlgo()">Run Algo</button>
+  </input-field>
+</form>
+<div ng-if="$ctrl.persons.length > 0">
+  <h1>You're testing these people</h1>
+  <ul>
+    <li ng-repeat="person in $ctrl.persons">{{person}}</li>
+  </ul>
+</div>
+
+<div ng-if="$ctrl.results.length >0">
+  <h1>These are true friends</h1>
+  <ul>
+    <li ng-repeat="result in $ctrl.results">{{result}}</li>
+  </ul>
+</div>
+
+
+<h1>HelloWorld</h1>
