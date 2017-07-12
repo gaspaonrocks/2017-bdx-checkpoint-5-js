@@ -1,14 +1,19 @@
+import moment from 'moment';
+
+moment.locale();
+
 let navbar = {
     templateUrl: 'js/components/common/navbar.html',
-    controller: ['UsersService', '$state', function(UsersService, $state) {
+    controller: ['UsersService', '$state', '$interval', function (UsersService, $state, $interval) {
         'use strict'
         angular.extend(this, {
             $onInit() {
+                $interval(() => {
+                    this.date = moment().format('LLL')
+                }, 1000)
                 UsersService.getCurrent().then((user) => {
                     this.user = user
-                }).catch((err) => {
-
-                })
+                }).catch((err) => {})
             },
             disconnect() {
                 UsersService.disconnect().then(() => {
@@ -17,7 +22,6 @@ let navbar = {
                     $state.reload()
                 })
             }
-
         })
     }]
 }
