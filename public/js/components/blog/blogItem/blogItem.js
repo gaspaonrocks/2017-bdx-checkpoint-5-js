@@ -3,13 +3,15 @@ Create Angular component blogItem into module app.blog with databinding properti
 - post : post data for all content
 - editable : boolean indicate if this element is editable
 */
+import moment from 'moment';
+
 let blogItem = {
     bindings: {
         post: "<",
         editable: "<"
     },
     templateUrl: 'js/components/blog/blogItem/blogItem.html',
-    controller: ['UsersService', 'PostsService', '$stateParams', '$state', function(UsersService, PostsService, $stateParams, $state) {
+    controller: ['UsersService', 'PostsService', '$stateParams', '$state', function (UsersService, PostsService, $stateParams, $state) {
         'use  strict'
         let initialPost;
 
@@ -35,6 +37,7 @@ let blogItem = {
                 PostsService.getById($stateParams.id).then((res) => {
                     // when this request receives response we affect response data to this controller variable post
                     this.post = res.data;
+                    this.displayDate = moment(this.post.date).format('LLL');
                     // save into initialPost a copy of this post (used for undo)
                     initialPost = angular.copy(this.post)
                 })
@@ -65,6 +68,7 @@ let blogItem = {
                     // if it's new post (when post._id doesn't exist) we affect to post variable response data (post created)
                     this.post = res.data
                 }
+                $state.go('blog.list')
             })
         }
 

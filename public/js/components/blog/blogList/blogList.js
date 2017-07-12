@@ -3,7 +3,7 @@ Create Angular component blogList into module app.blog
 */
 let blogList = {
     templateUrl: 'js/components/blog/blogList/blogList.html',
-    controller: ['UsersService', 'PostsService', function(UsersService, PostsService) {
+    controller: ['UsersService', 'PostsService', function (UsersService, PostsService) {
         'use strict'
         // Define startIndex variable with default value 3
         this.startIndex = 3
@@ -19,10 +19,11 @@ let blogList = {
         // Call get() method from PostsService.
         // When this request receive response we affect response data to this controller variable posts
         PostsService.get().then((res) => {
-            this.posts = res.data
+            this.posts = res.data;
+            console.log(this.posts);
         }).catch((err) => {
             this.posts = [{
-                title: "Hello There", 
+                title: "Hello There",
                 content: "I am an intersting article. There was an error by the way because API doesn't exist yet"
             }]
         })
