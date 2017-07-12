@@ -10,18 +10,21 @@ let Post = require('../models/post')
 
 class PostsController extends Controller {
 
-
     constructor() {
         super(Post)
     }
 
-    findById(req, res, next) {
-        // check if accessed post is published
-        // if (req.body.published === true) {
-            super.findById(req, res, next)
-        // } else {
-        //     return res.status("401").send("Article Not Published Yet !")
-        // }
+    find(req, res, next) {
+        // Get all documents and filter with queries string (req.query : ex. http://domain.ext/api/?query=string)
+        this.model.find(req.query, (err, documents) => {
+            let filteredData = [];
+            for (let i = 0, len = documents.length; i < len; i++) {
+                if (documents[i].published == true) {
+                    filteredData.push(documents[i]);
+                }
+            }
+            res.json(filteredData);
+        })
     }
 
 }

@@ -13,6 +13,8 @@ let blogModule = angular.module('app.blog', [])
     .component('blogItemMenu', blogItemMenu)
     .component('blogList', blogList)
     .config(['$stateProvider', ($stateProvider, $urlRouterProvider, $locationProvider) => {
+
+        let query = '?query=published';
         /*
           Define a state with name 'blog' this state is abstract and url is empty (root of application)
           template is ui-view it's used to display nested views
