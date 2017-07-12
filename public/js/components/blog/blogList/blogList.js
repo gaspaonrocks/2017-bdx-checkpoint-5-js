@@ -20,7 +20,6 @@ let blogList = {
         // When this request receive response we affect response data to this controller variable posts
         PostsService.get().then((res) => {
             this.posts = res.data;
-            console.log(this.posts);
         }).catch((err) => {
             this.posts = [{
                 title: "Hello There",

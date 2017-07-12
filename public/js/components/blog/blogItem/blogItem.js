@@ -37,7 +37,10 @@ let blogItem = {
                 PostsService.getById($stateParams.id).then((res) => {
                     // when this request receives response we affect response data to this controller variable post
                     this.post = res.data;
-                    this.displayDate = moment(this.post.date).format('LLL');
+                    this.post.date = new Date(this.post.date);
+                    if (this.post.date != 'undefined') {
+                        this.displayDate = moment(this.post.date).format('LLL');
+                    }
                     // save into initialPost a copy of this post (used for undo)
                     initialPost = angular.copy(this.post)
                 })
@@ -62,13 +65,13 @@ let blogItem = {
         this.save = () => {
             // Call save method form PostsService with post
             PostsService.save(this.post).then((res) => {
+                this.editMode = false;
                 // Change editMode value to false
-                this.editMode = false
                 if (!this.post._id) {
                     // if it's new post (when post._id doesn't exist) we affect to post variable response data (post created)
                     this.post = res.data
                 }
-                $state.go('blog.list')
+                this.displayDate = moment(this.post.date).format('LLL');
             })
         }
 
@@ -112,7 +115,6 @@ let blogItem = {
                 Materialize.toast(toastContent, 4000, 'toast-error')
             })
         }
-
     }]
 }
 
