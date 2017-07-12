@@ -22,10 +22,14 @@ let algo1 = {
               realFriends.push(friends[i]);
             }
           }
-        this.persons = [];
         return realFriends;
       })(this.persons);
       console.log(this.results);
+    }
+
+    this.clearTables = () => {
+      this.persons = [];
+      this.results = [];
     }
   }]
 }
