@@ -19,12 +19,7 @@ let blogList = {
         // Call get() method from PostsService.
         // When this request receive response we affect response data to this controller variable posts
         PostsService.get().then((res) => {
-            this.posts = [];
-            for (let i = 0, len = res.data.length; i < len; i++) {
-                if (res.data[i].published === true) {
-                    this.posts.push(res.data[i]);
-                }
-            }
+            this.posts = res.data;
         }).catch((err) => {
             this.posts = [{
                 title: "Hello There",

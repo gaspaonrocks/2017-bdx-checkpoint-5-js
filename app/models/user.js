@@ -32,7 +32,7 @@ let userSchema = new mongoose.Schema({
   },
   bookmarks: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'post'
+    ref: 'Post'
   }],
   isAdmin: {
     type: Boolean, 

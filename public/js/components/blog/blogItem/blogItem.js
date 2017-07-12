@@ -33,7 +33,6 @@ let blogItem = {
                 // Affect editMode property to true
                 this.editMode = true
             } else {
-                let query = encodeURI($stateParams);
                 // If $stateParams.id is an id we make HTTP request with this id to get data
                 PostsService.getById($stateParams.id).then((res) => {
                     // when this request receives response we affect response data to this controller variable post
@@ -96,7 +95,7 @@ let blogItem = {
 
         this.isFav = () => {
             if (!this.post) return
-            return (this.user.bookmarks.find((post_id) => post_id.id === this.post._id))
+            return (this.user.bookmarks.find((post_id) => post_id === this.post._id))
         }
 
         this.addOrRemoveToBookmark = () => {
@@ -115,6 +114,7 @@ let blogItem = {
 
             UsersService.update(this.user).then((res) => {
                 //return UsersService.setToken(res.data.token)
+                this.user = res.config.data
             }).then((user) => {
                 Materialize.toast((postFound ? 'Removed' : 'Added'), 2000, (postFound ? 'toast-warning' : 'toast-success'))
             }).catch((err) => {
