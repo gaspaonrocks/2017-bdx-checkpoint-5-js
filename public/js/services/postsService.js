@@ -11,9 +11,9 @@ export default ['$http', class PostsService {
         // HTTP Request method GET to our express API
         return this.$http.get('/api/posts')
     }
-    getById(id) {
+    getById(query) {
         // HTTP Request method GET with param (post id) to our express API
-        return this.$http.get('/api/posts/' + id)
+        return this.$http.get('/api/posts/' + query)
     }
     save(post) {
         if (post._id) {

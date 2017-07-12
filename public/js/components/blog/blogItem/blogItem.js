@@ -20,7 +20,7 @@ let blogItem = {
         UsersService.getCurrent().then((user) => {
             this.user = user
         }).catch((err) => {
-            console.log(err)
+            console.log(err);
         })
 
         // Test if $stateParams.id exists (ex: stateParams.id is 1234567 form this url http://domain.ext/1234567)
@@ -33,16 +33,22 @@ let blogItem = {
                 // Affect editMode property to true
                 this.editMode = true
             } else {
+                let query = encodeURI($stateParams);
                 // If $stateParams.id is an id we make HTTP request with this id to get data
                 PostsService.getById($stateParams.id).then((res) => {
                     // when this request receives response we affect response data to this controller variable post
                     this.post = res.data;
+                    // set up the date
                     this.post.date = new Date(this.post.date);
                     if (this.post.date != 'undefined') {
                         this.displayDate = moment(this.post.date).format('LLL');
+                    } else {
+                        this.displayDate = 'No date entered'
                     }
                     // save into initialPost a copy of this post (used for undo)
                     initialPost = angular.copy(this.post)
+                }).catch((err) => {
+                    Materialize.toast('Not Published Yet', 4000)
                 })
             }
         } else {
@@ -72,6 +78,7 @@ let blogItem = {
                     this.post = res.data
                 }
                 this.displayDate = moment(this.post.date).format('LLL');
+                console.log(this.post);
             })
         }
 

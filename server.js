@@ -1,18 +1,18 @@
 'use strict'
 // Set up ======================================================================
-let http            = require('http')
-let express         = require('express')
-let bodyParser      = require('body-parser')
-let cookieParser    = require('cookie-parser')
-let favicon         = require('serve-favicon')
-let methodOverride  = require('method-override')
-let logger          = require('morgan')
-let passport        = require('passport')
+let http = require('http')
+let express = require('express')
+let bodyParser = require('body-parser')
+let cookieParser = require('cookie-parser')
+let favicon = require('serve-favicon')
+let methodOverride = require('method-override')
+let logger = require('morgan')
+let passport = require('passport')
 
 // Will automatically load index.js in routes folder
-let routes          = require('./app/routes')
+let routes = require('./app/routes')
 
-let app             = express()
+let app = express()
 
 const ENV = require('./config/env')[process.env.NODE_ENV || 'development']
 
@@ -62,19 +62,19 @@ mongoose.connect(ENV.db);
 
 // Catch 404 not found errors and forward to error handler
 app.use((request, response, next) => {
-  let err = new Error('Not Found')
-  console.log("Were here")
-  err.status = 404
-  next(err)
+    let err = new Error('Not Found')
+    console.log("Were here")
+    err.status = 404
+    next(err)
 })
 
 // To better understand middlewares: 
 // http://expressjs.com/en/guide/writing-middleware.html
 // Middleware to catch all errors
 app.use((error, request, response, next) => {
-  console.error(error.stack)
-  console.log("Were also here")
-  response.status(error.status || 500).send(error.message)
+    console.error(error.stack)
+    console.log("Were also here")
+    response.status(error.status || 500).send(error.message)
 })
 
 //Export function startServer with port, path and callback params it's used by brunch
@@ -89,7 +89,7 @@ exports.startServer = (port, path, callback) => {
     console.log(`server listening on port ${port}`)
 
     //Intercept when application killed
-    process.on('SIGINT', function() {
+    process.on('SIGINT', function () {
         console.log("\nStopping...")
         process.exit()
     });

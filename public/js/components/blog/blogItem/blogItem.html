@@ -35,7 +35,7 @@
             <a ng-if="$ctrl.editMode" ng-click="$ctrl.save()" class="waves-effect"><i class="material-icons">done</i></a>
             <span ng-if="$ctrl.editMode" class="switch">
                 <label>Not Published
-                    <input type="checkbox">
+                    <input type="checkbox" ng-model="$ctrl.post.published">
                         <span class="lever"></span>Published
             </label>
             </span>

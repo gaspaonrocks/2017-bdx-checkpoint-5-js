@@ -15,6 +15,15 @@ class PostsController extends Controller {
         super(Post)
     }
 
+    findById(req, res, next) {
+        // check if accessed post is published
+        // if (req.body.published === true) {
+            super.findById(req, res, next)
+        // } else {
+        //     return res.status("401").send("Article Not Published Yet !")
+        // }
+    }
+
 }
 
 module.exports = PostsController
